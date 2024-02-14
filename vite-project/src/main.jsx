@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from "react";
+import { createRoot } from "react-dom/client";// Change this import
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
+import App from "./App";
 import './main.css'
-ReactDOM.createRoot(document.getElementById('root')).render(
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+            <App />
+        </QueryClientProvider>
+      </Provider>
+  </React.StrictMode>
+);
